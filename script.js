@@ -1,207 +1,134 @@
 // ==========================================================================
-// 1. GESTÃO DE DADOS (Conteúdo aprofundado)
+// 1. BANCO DE DADOS LOCAL
 // ==========================================================================
-
-// Dados das Cidades/Regiões da Rota do Café
 const citiesData = [
   {
     name: "Londrina",
-    description: "Antiga 'Capital Mundial do Café', foi o epicentro da expansão nas décadas de 50 e 60. Hoje, abriga o Museu Histórico que preserva toda a memória e a grandiosa infraestrutura da época de ouro.",
-    tag: "A Capital Histórica"
+    tag: "Capital Histórica",
+    description: "Conhecida como a 'Capital Mundial do Café' até os anos 70. O Museu Histórico de Londrina preserva fotos e equipamentos que contam como o café ergueu esta metrópole."
   },
   {
-    name: "Norte Pioneiro (Jacarezinho e Região)",
-    description: "Após as crises climáticas, a região se reinventou. Hoje possui Indicação Geográfica (INPI) e produz Cafés Especiais 100% Arábica, famosos por sua doçura natural e notas frutadas.",
-    tag: "Polo de Cafés Especiais"
+    name: "Norte Pioneiro",
+    tag: "Cafés Especiais",
+    description: "Região com Indicação Geográfica (IG). Focada em grãos 100% arábica com processos de pós-colheita sofisticados, resultando em cafés premiados mundialmente."
   },
   {
-    name: "Rolândia e Ribeirão Claro",
-    description: "Misturam a rica herança da imigração com o ecoturismo. Oferecem aos visitantes passeios por antigas fazendas, trilhas ecológicas e degustações guiadas de cafés premiados.",
-    tag: "Turismo de Experiência"
+    name: "Ribeirão Claro",
+    tag: "Turismo Rural",
+    description: "Oferece experiências imersivas em fazendas centenárias, onde o visitante pode acompanhar desde o florescer do cafezal até a degustação final da bebida."
   }
 ];
 
-// Dados do Acordeão (Fatos Históricos do Ouro Verde)
 const faqData = [
   {
-    question: "Como o 'Ouro Verde' transformou a geografia do Paraná?",
-    answer: "Entre 1940 e 1970, o cultivo de café provocou uma explosão demográfica. A necessidade de escoar os grãos acelerou a construção de ferrovias e fundou dezenas de municípios que surgiram literalmente em meio aos cafezais, como Maringá e Londrina."
+    q: "O que foi o Ciclo do Ouro Verde?",
+    a: "Foi o período de maior prosperidade econômica do Paraná (1940-1970), impulsionado pela exportação massiva de café, atraindo migrantes de todo o Brasil e do exterior."
   },
   {
-    question: "O que foi a trágica 'Geada Negra' de 1975?",
-    answer: "Na madrugada de 18 de julho de 1975, uma onda de frio histórico congelou a seiva das plantas, queimando e dizimando praticamente 100% das lavouras comerciais do estado numa única noite. Esse evento mudou a história do Paraná, forçando a introdução de novas culturas, como a soja."
-  },
-  {
-    question: "O Paraná ainda produz muito café atualmente?",
-    answer: "O volume de produção diminuiu, mas a qualidade disparou! Produtores locais adotaram alta tecnologia e práticas de sustentabilidade, migrando da produção em massa para o mercado de excelência."
+    q: "O impacto da Geada Negra de 1975",
+    a: "Um evento climático devastador que queimou todas as plantações do estado em uma noite. Isso causou a transição da agricultura para o plantio de soja e a busca por café de qualidade superior em vez de quantidade."
   }
 ];
 
-// Dados do Acordeão (Curiosidades)
-const faqData = [
-  {
-    question: "Por que 'Ouro Verde'?",
-    answer: "O café recebeu este apelido devido à riqueza extrema que a planta verde e seus grãos trouxeram para a economia da região."
-  },
-  {
-    question: "O que foi a 'Geada Negra' de 1975?",
-    answer: "Um fenômeno climático severo que dizimou quase todas as plantações de café do Paraná em uma única noite, mudando a história da agricultura no estado."
-  }
-];
-
-// Função para renderizar Cards de Cidades
-function renderCities() {
-  const container = document.getElementById('cities-grid');
-  let htmlContent = '';
-
-  citiesData.forEach(city => {
-    htmlContent += `
-      <article class="card">
-        <h3>${city.name}</h3>
-        <p><strong>${city.tag}</strong></p>
-        <p>${city.description}</p>
-      </article>
-    `;
-  });
-
-  container.innerHTML = htmlContent;
-}
-
-// Função para renderizar Acordeões
-function renderAccordions() {
-  const container = document.getElementById('accordion-container');
-  let htmlContent = '';
-
-  faqData.forEach((faq, index) => {
-    // Usando aria-expanded e aria-controls para acessibilidade
-    htmlContent += `
-      <div class="accordion-item">
-        <button class="accordion-header" aria-expanded="false" aria-controls="content-${index}">
-          ${faq.question}
-          <span aria-hidden="true">+</span>
-        </button>
-        <div id="content-${index}" class="accordion-content">
-          <p>${faq.answer}</p>
-        </div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = htmlContent;
-  initAccordionLogic();
-}
-
 // ==========================================================================
-// 2. LÓGICA DE COMPONENTES
+// 2. RENDERIZAÇÃO E COMPONENTES
 // ==========================================================================
 
-// Lógica do Acordeão
-function initAccordionLogic() {
-  const headers = document.querySelectorAll('.accordion-header');
-  
-  headers.forEach(header => {
-    header.addEventListener('click', () => {
-      const item = header.parentElement;
-      const isActive = item.classList.contains('active');
-      
-      // Fecha todos os outros abertos (Opcional, mas comum em acordeões)
-      document.querySelectorAll('.accordion-item').forEach(el => {
-        el.classList.remove('active');
-        el.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
-      });
-
-      // Abre o atual se não estava aberto
-      if (!isActive) {
-        item.classList.add('active');
-        header.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-}
-
-// Lógica do Carrossel Simples
-function initCarousel() {
-  const track = document.getElementById('carousel-track');
-  const slides = Array.from(track.children);
-  const nextButton = document.getElementById('carousel-next');
-  const prevButton = document.getElementById('carousel-prev');
-  
-  let currentSlideIndex = 0;
-
-  function updateCarousel() {
-    const amountToMove = slides[currentSlideIndex].style.left || `${currentSlideIndex * -100}%`;
-    track.style.transform = `translateX(${amountToMove})`;
-  }
-
-  nextButton.addEventListener('click', () => {
-    if (currentSlideIndex < slides.length - 1) {
-      currentSlideIndex++;
-      updateCarousel();
-    }
-  });
-
-  prevButton.addEventListener('click', () => {
-    if (currentSlideIndex > 0) {
-      currentSlideIndex--;
-      updateCarousel();
-    }
-  });
-}
-
-// ==========================================================================
-// 3. ACESSIBILIDADE & ANIMAÇÕES
-// ==========================================================================
-
-// Controle de Tamanho de Fonte
-let baseFontSize = 16;
-const rootHtml = document.documentElement;
-
-document.getElementById('btn-increase-font').addEventListener('click', () => {
-  if (baseFontSize < 24) {
-    baseFontSize += 2;
-    rootHtml.style.fontSize = `${baseFontSize}px`;
-  }
-});
-
-document.getElementById('btn-decrease-font').addEventListener('click', () => {
-  if (baseFontSize > 12) {
-    baseFontSize -= 2;
-    rootHtml.style.fontSize = `${baseFontSize}px`;
-  }
-});
-
-// Controle de Alto Contraste
-document.getElementById('btn-contrast').addEventListener('click', () => {
-  document.body.classList.toggle('high-contrast');
-});
-
-// Scroll Reveal usando Intersection Observer
-function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        // Descomente a linha abaixo se quiser que a animação aconteça apenas uma vez
-        // observer.unobserve(entry.target); 
-      }
-    });
-  }, {
-    threshold: 0.1 // Ativa quando 10% do elemento estiver visível
-  });
-
-  reveals.forEach(reveal => {
-    observer.observe(reveal);
-  });
-}
-
-// ==========================================================================
-// 4. INICIALIZAÇÃO
-// ==========================================================================
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   renderCities();
   renderAccordions();
-  initCarousel();
+  handleCarousel();
+  handleA11y();
   initScrollReveal();
-});
+}
+
+// Gera os cards de cidades dinamicamente
+function renderCities() {
+  const container = document.getElementById('cities-grid');
+  container.innerHTML = citiesData.map(city => `
+    <article class="card">
+      <span style="color:var(--accent); font-weight:bold; font-size:0.8rem">${city.tag}</span>
+      <h3 style="margin:10px 0">${city.name}</h3>
+      <p>${city.description}</p>
+    </article>
+  `).join('');
+}
+
+// Gera o acordeão de história
+function renderAccordions() {
+  const container = document.getElementById('accordion-container');
+  container.innerHTML = faqData.map((faq, i) => `
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="faq-${i}">
+        ${faq.q} <span>+</span>
+      </button>
+      <div id="faq-${i}" class="accordion-content">
+        <p>${faq.a}</p>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.accordion-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      item.classList.toggle('active');
+      const isOpen = item.classList.contains('active');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.querySelector('span').innerText = isOpen ? '-' : '+';
+    });
+  });
+}
+
+// ==========================================================================
+// 3. LÓGICA DO CARROSSEL (Autoplay + Loop)
+// ==========================================================================
+function handleCarousel() {
+  const track = document.getElementById('carousel-track');
+  const slides = Array.from(track.children);
+  const nextBtn = document.getElementById('carousel-next');
+  const prevBtn = document.getElementById('carousel-prev');
+  const wrapper = document.querySelector('.carousel-wrapper');
+
+  let currentIdx = 0;
+  let timer;
+
+  const move = (index) => {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    currentIdx = index;
+  };
+
+  const next = () => move(currentIdx === slides.length - 1 ? 0 : currentIdx + 1);
+  const prev = () => move(currentIdx === 0 ? slides.length - 1 : currentIdx - 1);
+
+  nextBtn.addEventListener('click', () => { next(); startTimer(); });
+  prevBtn.addEventListener('click', () => { prev(); startTimer(); });
+
+  const startTimer = () => { clearInterval(timer); timer = setInterval(next, 4000); };
+  const stopTimer = () => clearInterval(timer);
+
+  wrapper.addEventListener('mouseenter', stopTimer);
+  wrapper.addEventListener('mouseleave', startTimer);
+
+  startTimer(); // Inicia autoplay
+}
+
+// ==========================================================================
+// 4. ACESSIBILIDADE E REVEAL
+// ==========================================================================
+function handleA11y() {
+  let size = 16;
+  document.getElementById('btn-increase-font').onclick = () => { if(size<24) size+=2; document.documentElement.style.fontSize = size+'px'; };
+  document.getElementById('btn-decrease-font').onclick = () => { if(size>12) size-=2; document.documentElement.style.fontSize = size+'px'; };
+  document.getElementById('btn-contrast').onclick = () => document.body.classList.toggle('high-contrast');
+}
+
+function initScrollReveal() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// Inicializa tudo após carregar o DOM
+document.addEventListener('DOMContentLoaded', initApp);
