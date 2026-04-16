@@ -1,23 +1,39 @@
 // ==========================================================================
-// 1. GESTÃO DE DADOS (Renderização Dinâmica)
+// 1. GESTÃO DE DADOS (Conteúdo aprofundado)
 // ==========================================================================
 
-// Dados das Cidades
+// Dados das Cidades/Regiões da Rota do Café
 const citiesData = [
   {
     name: "Londrina",
-    description: "Conhecida como a Capital do Café, foi o principal polo de desenvolvimento do grão na década de 1950.",
-    tag: "Capital Histórica"
+    description: "Antiga 'Capital Mundial do Café', foi o epicentro da expansão nas décadas de 50 e 60. Hoje, abriga o Museu Histórico que preserva toda a memória e a grandiosa infraestrutura da época de ouro.",
+    tag: "A Capital Histórica"
   },
   {
-    name: "Jacarezinho",
-    description: "Porta de entrada da Rota, destaca-se hoje pelos Cafés Especiais com certificações internacionais.",
-    tag: "Cafés Especiais"
+    name: "Norte Pioneiro (Jacarezinho e Região)",
+    description: "Após as crises climáticas, a região se reinventou. Hoje possui Indicação Geográfica (INPI) e produz Cafés Especiais 100% Arábica, famosos por sua doçura natural e notas frutadas.",
+    tag: "Polo de Cafés Especiais"
   },
   {
-    name: "Ribeirão Claro",
-    description: "Reúne história cafeeira com o ecoturismo às margens da represa de Chavantes.",
-    tag: "Ecoturismo"
+    name: "Rolândia e Ribeirão Claro",
+    description: "Misturam a rica herança da imigração com o ecoturismo. Oferecem aos visitantes passeios por antigas fazendas, trilhas ecológicas e degustações guiadas de cafés premiados.",
+    tag: "Turismo de Experiência"
+  }
+];
+
+// Dados do Acordeão (Fatos Históricos do Ouro Verde)
+const faqData = [
+  {
+    question: "Como o 'Ouro Verde' transformou a geografia do Paraná?",
+    answer: "Entre 1940 e 1970, o cultivo de café provocou uma explosão demográfica. A necessidade de escoar os grãos acelerou a construção de ferrovias e fundou dezenas de municípios que surgiram literalmente em meio aos cafezais, como Maringá e Londrina."
+  },
+  {
+    question: "O que foi a trágica 'Geada Negra' de 1975?",
+    answer: "Na madrugada de 18 de julho de 1975, uma onda de frio histórico congelou a seiva das plantas, queimando e dizimando praticamente 100% das lavouras comerciais do estado numa única noite. Esse evento mudou a história do Paraná, forçando a introdução de novas culturas, como a soja."
+  },
+  {
+    question: "O Paraná ainda produz muito café atualmente?",
+    answer: "O volume de produção diminuiu, mas a qualidade disparou! Produtores locais adotaram alta tecnologia e práticas de sustentabilidade, migrando da produção em massa para o mercado de excelência."
   }
 ];
 
