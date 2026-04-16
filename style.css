@@ -1,0 +1,277 @@
+/* ==========================================================================
+   1. DESIGN SYSTEM (Variáveis)
+   -> Altere a paleta de cores e arredondamentos aqui.
+   ========================================================================== */
+:root {
+  /* Paleta Padrão (Tons terrosos de café) */
+  --bg-color: #faf7f2;
+  --bg-alt: #ebdcd0;
+  --text-main: #3e2723;
+  --text-muted: #5d4037;
+  --primary-color: #4e342e;
+  --primary-hover: #3e2723;
+  --accent-color: #2e7d32; /* Verde folha do café */
+  
+  /* Sistema de Espaçamento e Formas */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+  --radius: 12px; /* Altere para 0 se quiser bordas quadradas */
+}
+
+/* ==========================================================================
+   2. MODO ALTO CONTRASTE
+   -> Ativado via JavaScript na tag <body>
+   ========================================================================== */
+body.high-contrast {
+  --bg-color: #000000;
+  --bg-alt: #1a1a1a;
+  --text-main: #ffffff;
+  --text-muted: #e0e0e0;
+  --primary-color: #ffff00;
+  --primary-hover: #ffcc00;
+  --accent-color: #00ff00;
+}
+
+body.high-contrast .btn-primary {
+  color: #000 !important;
+}
+
+/* ==========================================================================
+   3. RESET & BASE
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-padding {
+  padding: var(--spacing-xl) 0;
+}
+
+.bg-alt {
+  background-color: var(--bg-alt);
+}
+
+h1, h2, h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   4. COMPONENTES E LAYOUT (Grid e Flexbox)
+   ========================================================================== */
+
+/* Barra de Acessibilidade */
+.a11y-bar {
+  background-color: var(--primary-color);
+  padding: var(--spacing-sm);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+.a11y-bar button {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--bg-color);
+  padding: var(--spacing-md) 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-md);
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* Botões */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 0;
+  background: linear-gradient(to bottom, var(--bg-alt), var(--bg-color));
+}
+
+/* SISTEMA DE GRID (Cards)
+   -> Altere a regra de 'grid-template-columns' para mudar o número de colunas.
+   -> 'repeat(auto-fit, minmax(280px, 1fr))' cria um grid fluido: 
+      quando o espaço é menor que 280px, ele quebra para a próxima linha.
+*/
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.card {
+  background-color: var(--bg-color);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Carrossel */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-track {
+  display: flex;
+  list-style: none;
+  transition: transform 0.5s ease-in-out;
+}
+.carousel-slide {
+  min-width: 100%;
+}
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.carousel-btn {
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px;
+}
+#carousel-prev { left: 0; }
+#carousel-next { right: 0; }
+
+/* Acordeão (Sistema de Abas) */
+.accordion-item {
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.accordion-header {
+  width: 100%;
+  text-align: left;
+  background-color: var(--bg-alt);
+  border: none;
+  padding: var(--spacing-md);
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+}
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  transition: max-height 0.3s ease;
+  padding: 0 var(--spacing-md);
+}
+.accordion-item.active .accordion-content {
+  max-height: 200px; /* Ajuste dependendo do texto */
+  padding: var(--spacing-md);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+/* ==========================================================================
+   5. ANIMAÇÕES (Scroll Reveal)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   6. MEDIA QUERIES (Desktop Enhancements)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
